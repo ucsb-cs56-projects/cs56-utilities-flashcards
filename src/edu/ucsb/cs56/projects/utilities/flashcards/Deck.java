@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.W12.syeshanov.flashcardsim;
+package edu.ucsb.cs56.projects.utilities.flashcards;
 
 import java.util.ArrayList;
 import java.io.Serializable;

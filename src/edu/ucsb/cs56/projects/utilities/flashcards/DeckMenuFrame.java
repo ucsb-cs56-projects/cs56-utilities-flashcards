@@ -1,8 +1,7 @@
-package edu.ucsb.cs56.W12.syeshanov.flashcardsim;
+package edu.ucsb.cs56.projects.utilities.flashcards;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
 import java.awt.event.*;
 import javax.swing.border.*;
 import java.util.ArrayList;

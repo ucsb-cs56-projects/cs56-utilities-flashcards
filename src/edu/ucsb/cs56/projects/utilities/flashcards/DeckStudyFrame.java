@@ -1,9 +1,7 @@
-package edu.ucsb.cs56.W12.syeshanov.flashcardsim;
+package edu.ucsb.cs56.projects.utilities.flashcards;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
