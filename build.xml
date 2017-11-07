@@ -9,9 +9,9 @@
    <property name="webBaseUrl" value="http://www.cs.ucsb.edu/~${env.USER}/" />
 
   <property name="course" value="cs56" />
-  <property name="quarter" value="W12" />
+  <property name="quarter" value="F17" />
   <property name="issueNum" value="0000449" />
-  <property name="javaPkg" value="edu.ucsb.cs56.W12.syeshanov.flashcardsim" />
+  <property name="javaPkg" value="edu.ucsb.cs56.projects.utilities.flashcards" />
   <property name="mainClass" value="${javaPkg}.FlashCardApplication" />
   <property name="quizFrameClass" value="${javaPkg}.QuizFrame" />
   <property name="mainMenuFrameClass" value="${javaPkg}.MainMenuFrame" />
