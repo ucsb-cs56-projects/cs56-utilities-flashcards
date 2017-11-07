@@ -272,11 +272,13 @@ public class QuizFrame extends JFrame implements QuizUI {
 	}
 
 	/**
-	 * Listener for the "Quit" Button
+	 * Listener for the "Main Menu" Button
 	 */
 	public class MainMenuButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-		//TODO MainMenu Action
+			e = new ActionEvent(outer, 0, "MainMenu");
+			for(ActionListener listener: outer.actionListeners)
+				listener.actionPerformed(e);
 		}
 	}
 

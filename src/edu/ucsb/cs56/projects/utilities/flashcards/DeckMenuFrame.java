@@ -72,7 +72,9 @@ public class DeckMenuFrame extends JFrame {
 	 */
 	public class MainMenuButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-		//TODO MainMenu Button Action
+			ev = new ActionEvent(outer, 0, "MainMenu");
+			for(ActionListener listener: outer.actionListeners)
+				listener.actionPerformed(ev);
 		}
 	}
 	/**

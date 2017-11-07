@@ -77,6 +77,9 @@ public class DeckStudyFrame extends JFrame implements ActionListener,DeckStudyUI
 		this.shuffleButton = createButton("Shuffle", 150);
 		this.shuffleButton.addActionListener(this);
 
+		this.mainMenuButton = createButton("Main Menu", 150);
+		this.mainMenuButton.addActionListener(this);
+
 		this.quitButton = createButton("Quit", 150);
 		this.quitButton.addActionListener(this);
 
@@ -92,9 +95,10 @@ public class DeckStudyFrame extends JFrame implements ActionListener,DeckStudyUI
 
 
 		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(1,2));
+		buttonPanel.setLayout(new GridLayout(1,3));
 		buttonPanel.add(shufflePanel);
 		buttonPanel.add(quitPanel);
+		buttonPanel.add(mainMenuButton);
 		buttonPanel.setBorder(new EmptyBorder(25, 0,0,0));
 		this.add(buttonPanel);
 
@@ -165,7 +169,12 @@ public class DeckStudyFrame extends JFrame implements ActionListener,DeckStudyUI
 				listener.actionPerformed(e);
 			}
 		}
-
+		if(e.getSource() == this.mainMenuButton){
+			e = new ActionEvent(this, 0, "MainMenu");
+			for(ActionListener listener: this.actionListeners) {
+				listener.actionPerformed(e);
+			}
+		}
 
 	}
 
@@ -221,4 +230,5 @@ public class DeckStudyFrame extends JFrame implements ActionListener,DeckStudyUI
 	private JPanel cardTextPanel;
 	private DeckStudyController controller;
 	private JButton quitButton;
+	private JButton mainMenuButton;
 }

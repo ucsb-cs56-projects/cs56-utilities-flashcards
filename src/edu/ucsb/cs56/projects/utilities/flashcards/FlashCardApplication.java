@@ -45,10 +45,17 @@ public class FlashCardApplication {
 	 */
 	public class CreateFrameListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			deck = createFrame.getDeck();
-			createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-			outer.showDeckMenu();
-			createFrame.setVisible(false);
+			if(ev.getActionCommand().equals("DeckCreated")) {
+				deck = createFrame.getDeck();
+				createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				outer.showDeckMenu();
+				createFrame.setVisible(false);
+			}
+			else if(ev.getActionCommand().equals("MainMenu")){
+				createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				createFrame.setVisible(false);
+				outer.showMainMenu();
+			}
 		}
 	}
 
@@ -76,6 +83,9 @@ public class FlashCardApplication {
 				studyFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				studyFrame.setVisible(true);
 			}
+			else if(cmd.equals("MainMenu")){
+				outer.showMainMenu();
+			}
 		}
 	}
 
@@ -84,19 +94,36 @@ public class FlashCardApplication {
 	 */
 	public class ModeListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			if(outer.studyFrame != null) {
-				outer.studyFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				outer.studyFrame.setVisible(false);
-				outer.studyFrame.dispose();
-				outer.studyFrame = null;
+			if(ev.getActionCommand().equals("ModeExit")) {
+				if (outer.studyFrame != null) {
+					outer.studyFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					outer.studyFrame.setVisible(false);
+					outer.studyFrame.dispose();
+					outer.studyFrame = null;
+				}
+				if (outer.quizFrame != null) {
+					outer.quizFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					outer.quizFrame.setVisible(false);
+					outer.quizFrame.dispose();
+					outer.quizFrame = null;
+				}
+				outer.showDeckMenu();
 			}
-			if(outer.quizFrame != null) {
-				outer.quizFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				outer.quizFrame.setVisible(false);
-				outer.quizFrame.dispose();
-				outer.quizFrame = null;
+			else if(ev.getActionCommand().equals("MainMenu")) {
+				if (outer.studyFrame != null) {
+					outer.studyFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					outer.studyFrame.setVisible(false);
+					outer.studyFrame.dispose();
+					outer.studyFrame = null;
+				}
+				if (outer.quizFrame != null) {
+					outer.quizFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					outer.quizFrame.setVisible(false);
+					outer.quizFrame.dispose();
+					outer.quizFrame = null;
+				}
+				outer.showMainMenu();
 			}
-			outer.showDeckMenu();
 		}
 	}
 
@@ -110,6 +137,15 @@ public class FlashCardApplication {
 		deckMenu.setVisible(true);
 	}
 
+	/**
+	 * Method for showing the MainMenu JFrame
+	 */
+	public void showMainMenu() {
+		mainMenu = new MainMenuFrame();
+		mainMenu.addActionListener(new MainMenuListener());
+		mainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainMenu.setVisible(true);
+	}
 	/**
 	 * The main function for the application.
 	 * The only argument will be the file name of the
