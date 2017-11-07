@@ -74,6 +74,8 @@ public class CreateDeckFrame extends JFrame {
         this.saveButton = createButton("Save", 150);
         this.saveButton.addActionListener(new SaveButtonListener());
 
+        this.mainMenuButton = createButton("Main Menu", 150);
+        this.mainMenuButton.addActionListener(new MainMenuButtonListener());
 
         JPanel newCardPanel = new JPanel();
         newCardPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0,0));
@@ -83,10 +85,14 @@ public class CreateDeckFrame extends JFrame {
         savePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0,0));
         savePanel.add(this.saveButton);
 
+        JPanel mainMenuPanel = new JPanel();
+        mainMenuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0,0));
+        mainMenuPanel.add(this.mainMenuButton);
 
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new GridLayout(1,2));
+        buttonPanel.setLayout(new GridLayout(1,3));
         buttonPanel.add(newCardPanel);
+        buttonPanel.add(mainMenuPanel);
         buttonPanel.add(savePanel);
         buttonPanel.setBorder(new EmptyBorder(25, 0,0,0));
         this.add(buttonPanel);
@@ -206,6 +212,14 @@ public class CreateDeckFrame extends JFrame {
         }
     }
 
+    /**
+     * Button Listener for the "Main Menu Button"
+     */
+    public class MainMenuButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent ev) {
+            // TODO MainMenuButton Action
+        }
+    }
     /**
      * Button Listener for the "Edit Card" Button
      */
@@ -333,6 +347,7 @@ public class CreateDeckFrame extends JFrame {
     private JToggleButton flipCardButton;
     private JButton nextCardButton;
     private JButton newCardButton;
+    private JButton mainMenuButton;
     private JButton editCardButton;
     private JButton saveButton;
     private JLabel positionLabel;
