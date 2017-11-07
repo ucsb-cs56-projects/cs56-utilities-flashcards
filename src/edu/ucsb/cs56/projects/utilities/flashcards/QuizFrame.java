@@ -83,6 +83,9 @@ public class QuizFrame extends JFrame implements QuizUI {
 		this.quitButton = createButton("Quit");
 		this.quitButton.addActionListener(new QuitButtonListener());
 
+		this.mainMenuButton = createButton("Main Menu");
+		this.mainMenuButton.addActionListener(new MainMenuButtonListener());
+
 		JPanel restartPanel = new JPanel();
 		restartPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0,0));
 		restartPanel.add(this.restartButton);
@@ -91,9 +94,14 @@ public class QuizFrame extends JFrame implements QuizUI {
 		quitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0,0));
 		quitPanel.add(this.quitButton);
 
+		JPanel mainMenuPanel = new JPanel();
+		mainMenuPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+		mainMenuPanel.add(this.mainMenuButton);
+
 		buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(1,2));
+		buttonPanel.setLayout(new GridLayout(1,3));
 		buttonPanel.add(restartPanel);
+		buttonPanel.add(mainMenuButton);
 		buttonPanel.add(quitPanel);
 		buttonPanel.setBorder(new EmptyBorder(25, 0,0,0));
 		this.add(buttonPanel);
@@ -264,6 +272,15 @@ public class QuizFrame extends JFrame implements QuizUI {
 	}
 
 	/**
+	 * Listener for the "Quit" Button
+	 */
+	public class MainMenuButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+		//TODO MainMenu Action
+		}
+	}
+
+	/**
 	 * Method for adding an action listener
 	 * @param listener an ActionListener
 	 */
@@ -277,6 +294,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 	private JButton nextCardButton;
 	private JButton restartButton;
 	private JButton quitButton;
+	private JButton mainMenuButton;
 	private JLabel scoreLabel;
 	private JLabel positionLabel;
 	private JLabel cardTextLabel;
