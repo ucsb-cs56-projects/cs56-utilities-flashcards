@@ -93,12 +93,16 @@ public class DeckStudyFrame extends JFrame implements ActionListener,DeckStudyUI
 		quitPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0,0));
 		quitPanel.add(this.quitButton);
 
+		JPanel mainMenuPanel = new JPanel();
+		mainMenuPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+		mainMenuPanel.add(this.mainMenuButton);
 
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1,3));
 		buttonPanel.add(shufflePanel);
+		buttonPanel.add(mainMenuPanel);
 		buttonPanel.add(quitPanel);
-		buttonPanel.add(mainMenuButton);
+
 		buttonPanel.setBorder(new EmptyBorder(25, 0,0,0));
 		this.add(buttonPanel);
 

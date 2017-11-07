@@ -77,13 +77,13 @@ public class QuizFrame extends JFrame implements QuizUI {
 		buttonPanel.add(this.nextCardButton);
 		this.add(buttonPanel);
 
-		this.restartButton = createButton("Restart");
+		this.restartButton = createButton("Restart", 150);
 		this.restartButton.addActionListener(new RestartButtonListener());
 
-		this.quitButton = createButton("Quit");
+		this.quitButton = createButton("Quit", 150);
 		this.quitButton.addActionListener(new QuitButtonListener());
 
-		this.mainMenuButton = createButton("Main Menu");
+		this.mainMenuButton = createButton("Main Menu", 150);
 		this.mainMenuButton.addActionListener(new MainMenuButtonListener());
 
 		JPanel restartPanel = new JPanel();
