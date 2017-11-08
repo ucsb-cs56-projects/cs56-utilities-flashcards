@@ -49,16 +49,32 @@ public class Deck  implements Serializable {
      Shuffles the deck into a random order
      */
     public void shuffle() {
-        ArrayList<FlashCard> shuffledCards = new ArrayList<FlashCard>();
-        int numCards = cards.size();
-        for(int i=0; i < numCards; i++)
-        {
-            int randomIndex = (int)(Math.random()*cards.size());
-            FlashCard randomCard = this.cards.remove(randomIndex);
-            shuffledCards.add(randomCard);
+//        ArrayList<FlashCard> shuffledCards = new ArrayList<FlashCard>();
+//        int numCards = cards.size();
+//        for(int i=0; i < numCards; i++)
+//        {
+//            int randomIndex = (int)(Math.random()*cards.size());
+//            FlashCard randomCard = this.cards.remove(randomIndex);
+//            shuffledCards.add(randomCard);
+//        }
+//
+//        this.cards = shuffledCards;
+        for(int i = cards.size(); i > 1; i--){
+            int randomIndex = (int) (Math.random()*cards.size());
+            if(i-1 != randomIndex)
+                swap(i-1,randomIndex);
         }
+    }
 
-        this.cards = shuffledCards;
+    /**
+     * Helper function for swapping two elements in cards
+     * @param i index one
+     * @param j index two
+     */
+    private void swap(int i, int j){
+        FlashCard temp = cards.get(i);
+        cards.set(i,cards.get(i));
+        cards.set(j,temp);
     }
 
     /**
