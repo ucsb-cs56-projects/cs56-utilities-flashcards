@@ -189,6 +189,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 
 		if(this.answerResultLabel != null)
 			this.answerResultPanel.remove(this.answerResultLabel);
+		if(this.yourAnswerLabel != null)
 			this.yourAnswerPanel.remove(this.yourAnswerLabel);
 
 		this.answerResultLabel = null;
