@@ -58,9 +58,11 @@ public class QuizFrame extends JFrame implements QuizUI {
 		this.add(this.cardTextPanel);
 
 
-		this.answerPanel = new JPanel();
-		this.add(answerPanel);
+		this.answerResultPanel = new JPanel();
+		this.add(answerResultPanel);
 
+		this.yourAnswerPanel = new JPanel();
+		this.add(yourAnswerPanel);
 
 		this.answerButton = createButton("Answer");
 		this.answerButton.addActionListener(new AnswerButtonListener());
@@ -137,23 +139,27 @@ public class QuizFrame extends JFrame implements QuizUI {
 	 * @param answer The answer to the card
 	 */
 	public void questionWasAnswered(String guess, String answer) {
-		if(this.answerLabel != null) {
-			this.answerPanel.remove(this.answerLabel);
-			this.answerLabel = null;
+		if(this.answerResultLabel != null) {
+			this.answerResultPanel.remove(this.answerResultLabel);
+			this.yourAnswerPanel.remove(this.yourAnswerLabel);
+			this.answerResultLabel = null;
+			this.yourAnswerLabel = null;
 		}
 
 		if(guess.equals(answer)) {
-			this.answerLabel = new JLabel("Correct!");
-			this.answerLabel.setForeground(Color.green);
-
+			this.answerResultLabel = new JLabel("Correct!");
+			this.answerResultLabel.setForeground(Color.green);
+			this.yourAnswerLabel = new JLabel("Your Answer: " + guess);
 		}
 		else {
-			this.answerLabel = new JLabel("Incorrect!");
-			this.answerLabel.setForeground(Color.red);
+			this.answerResultLabel = new JLabel("Incorrect!");
+			this.answerResultLabel.setForeground(Color.red);
+			this.yourAnswerLabel = new JLabel("Your Answer: " + guess);
 		}
 
-		this.answerPanel.add(this.answerLabel);
-		this.answerPanel.invalidate();
+		this.answerResultPanel.add(this.answerResultLabel);
+		this.yourAnswerPanel.add(this.yourAnswerLabel);
+		this.answerResultPanel.invalidate();
 		this.cardTextLabel.setText(answer);
 		this.answerButton.setEnabled(false);
 
@@ -181,10 +187,11 @@ public class QuizFrame extends JFrame implements QuizUI {
 
 		this.cardTextLabel.setText(cardText);
 
-		if(this.answerLabel != null)
-			this.answerPanel.remove(this.answerLabel);
+		if(this.answerResultLabel != null)
+			this.answerResultPanel.remove(this.answerResultLabel);
+			this.yourAnswerPanel.remove(this.yourAnswerLabel);
 
-		this.answerLabel = null;
+		this.answerResultLabel = null;
 		this.nextCardButton.setEnabled(false);
 		this.answerButton.setEnabled(true);
 		this.answerTextField.setText("");
@@ -300,8 +307,10 @@ public class QuizFrame extends JFrame implements QuizUI {
 	private JLabel scoreLabel;
 	private JLabel positionLabel;
 	private JLabel cardTextLabel;
-	private JLabel answerLabel;
-	private JPanel answerPanel;
+	private JLabel answerResultLabel;
+	private JLabel yourAnswerLabel;
+	private JPanel answerResultPanel;
+	private JPanel yourAnswerPanel;
 	private JPanel cardTextPanel;
 	private JTextField answerTextField;
 	private QuizFrame outer;
