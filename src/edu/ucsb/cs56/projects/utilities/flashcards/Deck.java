@@ -73,7 +73,7 @@ public class Deck  implements Serializable {
      */
     private void swap(int i, int j){
         FlashCard temp = cards.get(i);
-        cards.set(i,cards.get(i));
+        cards.set(i,cards.get(j));
         cards.set(j,temp);
     }
 

@@ -48,11 +48,8 @@ public class DeckStudyController {
 			return;
 		}
 
-
-
 		this.currentCard = this.deck.draw();
 		this.deck.putBack(this.currentCard);
-
 		this.isFlipped = false;
 		this.position = (this.position % this.deck.getSize()) + 1;
 
@@ -65,10 +62,8 @@ public class DeckStudyController {
 	 */
 	public void shuffleDeck() {
 		if(this.currentCard != null){
-			this.deck.putBack(this.currentCard);
 			this.currentCard = null;
 		}
-
 		this.deck.shuffle();
 		this.position = 0;
 		this.nextCard(); // get the next card and update the ui.
