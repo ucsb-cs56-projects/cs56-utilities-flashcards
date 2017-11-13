@@ -23,6 +23,11 @@ public class QuizController {
     }
 
     /**
+     * Method for passing on an override command to the Quiz
+     */
+    public void override(){quiz.override();}
+
+    /**
      * Getter for the current card's text
      * @return The current card's front text
      */

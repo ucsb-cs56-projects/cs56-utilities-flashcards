@@ -85,6 +85,11 @@ public class Quiz {
 	}
 
 	/**
+	 * Method for incrementing the correctAnswerCount when an Override action is submitted
+	 */
+	public void override(){correctAnswerCount++;}
+
+	/**
 	 * Method for restarting the quiz
 	 */
 	public void restart() {

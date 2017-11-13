@@ -79,6 +79,21 @@ public class QuizFrame extends JFrame implements QuizUI {
 		buttonPanel.add(this.nextCardButton);
 		this.add(buttonPanel);
 
+
+
+
+		this.overrideButton = createButton("My answer was correct!", 250);
+		this.overrideButton.addActionListener(new OverrideButtonListener());
+
+		JPanel overridePanel = new JPanel();
+		overridePanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+		overridePanel.add(this.overrideButton);
+
+		buttonPanel = new JPanel();
+
+		buttonPanel.add(overridePanel);
+		this.add(buttonPanel);
+
 		this.restartButton = createButton("Restart", 150);
 		this.restartButton.addActionListener(new RestartButtonListener());
 
@@ -103,7 +118,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 		buttonPanel = new JPanel();
 		buttonPanel.setLayout(new GridLayout(1,3));
 		buttonPanel.add(restartPanel);
-		buttonPanel.add(mainMenuButton);
+		buttonPanel.add(mainMenuPanel);
 		buttonPanel.add(quitPanel);
 		buttonPanel.setBorder(new EmptyBorder(25, 0,0,0));
 		this.add(buttonPanel);
@@ -134,7 +149,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 	}
 
 	/**
-	 * Method for checking the answer with the guess
+	 * Method for checking the answer with the guess and displaying text pertaining to your answer
 	 * @param guess A user's guess string
 	 * @param answer The answer to the card
 	 */
@@ -155,6 +170,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 			this.answerResultLabel = new JLabel("Incorrect!");
 			this.answerResultLabel.setForeground(Color.red);
 			this.yourAnswerLabel = new JLabel("Your Answer: " + guess);
+			this.overrideButton.setEnabled(true);
 		}
 
 		this.answerResultPanel.add(this.answerResultLabel);
@@ -166,13 +182,12 @@ public class QuizFrame extends JFrame implements QuizUI {
 		int score = this.controller.getScore();
 		int possibleScore = this.controller.getPossibleScore();
 		this.scoreLabel.setText(String.format("Score: %d/%d", score, possibleScore));
-
 		if(!this.controller.quizIsComplete())
 			this.nextCardButton.setEnabled(true);
 	}
 
 	/**
-	 * Method for showing the current Quiz state
+	 * Method for showing the Quiz State when you can answer a question
 	 */
 	public void showQuizState() {
 		int score = this.controller.getScore();
@@ -187,17 +202,19 @@ public class QuizFrame extends JFrame implements QuizUI {
 
 		this.cardTextLabel.setText(cardText);
 
-		if(this.answerResultLabel != null)
+		if(this.answerResultLabel != null) {
 			this.answerResultPanel.remove(this.answerResultLabel);
+		}
 		if(this.yourAnswerLabel != null)
 			this.yourAnswerPanel.remove(this.yourAnswerLabel);
 
+
 		this.answerResultLabel = null;
 		this.nextCardButton.setEnabled(false);
+		this.overrideButton.setEnabled(false);
 		this.answerButton.setEnabled(true);
 		this.answerTextField.setText("");
 		this.answerTextField.setEnabled(true);
-
 	}
 
 	/**
@@ -291,6 +308,17 @@ public class QuizFrame extends JFrame implements QuizUI {
 	}
 
 	/**
+	 * Listener for the Incorrect Answer Override Button
+	 */
+	public class OverrideButtonListener extends NextCardButtonListener {
+		@Override
+		public void actionPerformed(ActionEvent e){
+			//TODO OverrideButton Listener
+			outer.controller.override();
+			super.actionPerformed(e);
+		}
+	}
+	/**
 	 * Method for adding an action listener
 	 * @param listener an ActionListener
 	 */
@@ -305,6 +333,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 	private JButton restartButton;
 	private JButton quitButton;
 	private JButton mainMenuButton;
+	private JButton overrideButton;
 	private JLabel scoreLabel;
 	private JLabel positionLabel;
 	private JLabel cardTextLabel;
