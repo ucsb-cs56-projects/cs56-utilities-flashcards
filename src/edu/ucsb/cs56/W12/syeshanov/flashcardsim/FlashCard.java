@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.utilities.flashcards;
+package edu.ucsb.cs56.W12.syeshanov.flashcardsim;
 
 import java.io.Serializable;
 
@@ -12,9 +12,9 @@ import java.io.Serializable;
 public class FlashCard implements Serializable{
 
     /**
-     Constructs a new FlashCard with a front and back text.
-     @param frontText The text for the front of the card.
-     @param backText The text for the back of the card.
+       Constructs a new FlashCard with a front and back text.
+       @param frontText The text for the front of the card.
+       @param backText The text for the back of the card.
      */
     public FlashCard(String frontText, String backText) {
         this.frontText = frontText;
@@ -29,7 +29,7 @@ public class FlashCard implements Serializable{
 
 
     /** Setter for the back text 
-     @param backText The text for the back of the card.
+	@param backText The text for the back of the card.
      */
 
     public void setBackText(String backText) {
@@ -43,7 +43,7 @@ public class FlashCard implements Serializable{
     }
 
     /** Setter for the front text 
-     @param frontText The text for the front of the card.
+	@param frontText The text for the front of the card.
      */
     public void setFrontText(String frontText) {
         this.frontText = frontText;
@@ -56,7 +56,7 @@ public class FlashCard implements Serializable{
     }
 
     /** Method for comparing two flashcards 
-     @param card The other card to be compared.
+	@param card The other card to be compared.
      */
     public boolean equals(FlashCard card){
         return this.frontText.equals(card.frontText) && this.backText.equals(card.backText);

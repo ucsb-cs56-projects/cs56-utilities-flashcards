@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.projects.utilities.flashcards;
+package edu.ucsb.cs56.W12.syeshanov.flashcardsim;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -30,7 +30,7 @@ public class DeckTest {
         String name = "Chemistry";
         Deck instance = new Deck("Unicorn");
         instance.setName(name);
-        assertEquals(instance.getName(), name);
+	assertEquals(instance.getName(), name);
     }
 
     /**
@@ -40,21 +40,21 @@ public class DeckTest {
     public void testShuffle() {
         System.out.println("shuffle");
         Deck instance = new Deck();
-        for(int i=0; i<100; i++){
-            FlashCard card = new FlashCard(""+i,""+i);
-            instance.putBack(card);
+	for(int i=0; i<100; i++){
+	    FlashCard card = new FlashCard(""+i,""+i);
+	    instance.putBack(card);
         }
-        instance.shuffle();
-        boolean foundDifference = false;
-        for(int i =0; i<100; i++){
-            FlashCard drawnCard = instance.draw();
-            String text = drawnCard.getFrontText();
-            if(!text.equals(""+i)){
-                foundDifference = true;
-                break;
-            }
-        }
-        assertEquals(foundDifference, true);
+	instance.shuffle();
+	boolean foundDifference = false;
+	for(int i =0; i<100; i++){
+	    FlashCard drawnCard = instance.draw();
+	    String text = drawnCard.getFrontText();
+	    if(!text.equals(""+i)){
+		foundDifference = true;
+		break;
+	    }
+	}
+	assertEquals(foundDifference, true);
     }
 
     /**
@@ -65,7 +65,7 @@ public class DeckTest {
         System.out.println("putBack and draw");
         Deck instance = new Deck();
         FlashCard expResult = new FlashCard("CS56", "Advanced Application Programming");
-        instance.putBack(expResult);
+	instance.putBack(expResult);
         FlashCard result = instance.draw();
         assertEquals(expResult, result);
     }
