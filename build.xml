@@ -79,13 +79,6 @@
    <echo>Java web start at ${jwsURL}</echo>
  </target>
 
-<target name="linenumbers" description="Creates a file containing all source files with line numbers">
-   <exec executable="bash">
-     <arg value="-c"/>
-     <arg value='tree -ifQ src | grep \.java\"$ | xargs pr -n > numberedsource.txt'/>
-   </exec>
-</target>
-
   <target name="clean" >
     <defaultexcludes remove="**/*~" />
     <delete>
@@ -189,7 +182,7 @@
 
 </target>
 
- <target name="publish" depends="jar,jws,javadoc,download,linenumbers">
+ <target name="publish" depends="jar,jws,javadoc,download">
    <mkdir dir="${webRoot}/${projectPath}" />
 
    <delete dir="${webRoot}/${projectPath}/browse" />
