@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.W12.syeshanov.flashcardsim;
+package edu.ucsb.cs56.projects.utilities.flashcards;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -31,7 +31,7 @@ public class FlashCardTest {
         String backText = "A cute fuzzy animal";
         FlashCard instance = new FlashCard("Dog","Dolphins");
         instance.setBackText(backText);
-	assertEquals(instance.getBackText(), backText);
+        assertEquals(instance.getBackText(), backText);
     }
 
     /**
@@ -55,7 +55,7 @@ public class FlashCardTest {
         String frontText = "Ice cream";
         FlashCard instance = new FlashCard("Snow","Something cold");
         instance.setFrontText(frontText);
-	assertEquals(instance.getFrontText(), frontText);
+        assertEquals(instance.getFrontText(), frontText);
     }
 
     /**
@@ -82,10 +82,10 @@ public class FlashCardTest {
         boolean result = instance.equals(card);
         assertEquals(expResult, result);
 
-	card = new FlashCard("Adele", "Sings much better");
-	expResult = true;
-	result = instance.equals(card);
-	assertEquals(expResult, result);
+        card = new FlashCard("Adele", "Sings much better");
+        expResult = true;
+        result = instance.equals(card);
+        assertEquals(expResult, result);
     }
 
 }
