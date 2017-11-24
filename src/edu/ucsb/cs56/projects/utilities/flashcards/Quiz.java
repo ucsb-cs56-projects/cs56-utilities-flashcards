@@ -7,10 +7,12 @@ public class Quiz {
 	 * @param deck The deck to be quizzed on
 	 */
 	public Quiz(Deck deck) {
-		this.currentdeck = deck;
-		this.currentCard = this.currentdeck.draw();
-		this.currentdeck.putBack(currentCard);
-		this.restart();
+		this.currentDeck = deck;
+		this.originalDeck = deck;
+		this.currentCard = this.currentDeck.draw();
+		this.currentDeck.putBack(currentCard);
+		this.incorrectCards = new Deck();
+		this.restart("Soft Reset");
 	}
 
 	/**
@@ -34,7 +36,7 @@ public class Quiz {
 	 * @return The index of the current card
 	 */
 	public int getCurrentCardNum() {
-		if(answerCount < currentdeck.getSize())
+		if(answerCount < currentDeck.getSize())
 			return this.answerCount+1;
 		else
 			return this.answerCount;
@@ -45,7 +47,7 @@ public class Quiz {
 	 * @return The deck's size
 	 */
 	public int getDeckSize() {
-		return this.currentdeck.getSize();
+		return this.currentDeck.getSize();
 	}
 
 	/**
@@ -69,14 +71,15 @@ public class Quiz {
 				this.correctAnswerCount += 1;
 			}
 			else {
+				incorrectCards.putBack(currentCard);
 				correctAnswer = currentCard.getBackText();
 			}
 
 			this.answerCount += 1;
-			this.currentCard = this.currentdeck.draw();
-			this.currentdeck.putBack(this.currentCard);
+			this.currentCard = this.currentDeck.draw();
+			this.currentDeck.putBack(this.currentCard);
 
-			if(this.answerCount == this.currentdeck.getSize())
+			if(this.answerCount == this.currentDeck.getSize())
 				this.completeFlag = true;
 
 			return correctAnswer;
@@ -87,25 +90,34 @@ public class Quiz {
 	/**
 	 * Method for incrementing the correctAnswerCount when an Override action is submitted
 	 */
-	public void override(){correctAnswerCount++;}
+	public void override(){
+		incorrectCards.pop();
+		correctAnswerCount++;
+	}
 
 	/**
 	 * Method for restarting the quiz
+	 *
+	 * Options:
+	 * 		Hard Reset - Resets to beginning of the entire quiz session
+	 *		Subdeck Reset - Resets to a subdeck of incorrect cards
+	 * 		Soft Reset - Resets to beginning of current subdeck
 	 */
 	public void restart(String option) {
-		if(option.equals("Soft Reset")) {
+		if(option != "Invalid Option") {
 			this.completeFlag = false;
 			this.correctAnswerCount = 0;
 			this.answerCount = 0;
-			this.currentdeck.shuffle();
-			this.currentCard = this.currentdeck.draw();
-			this.currentdeck.putBack(this.currentCard);
-		}
-		else if(option.equals("Hard Reset")) {
-
-		}
-		else if(option.equals("Subdeck Reset")){
-
+			if (option.equals("Hard Reset")) {
+				this.currentDeck = originalDeck;
+			} else if (option.equals("Subdeck Reset")) {
+				this.currentDeck = incorrectCards;
+			}
+			//Soft Reset doesn't do anything extra
+			incorrectCards.empty();
+			this.currentDeck.shuffle();
+			this.currentCard = this.currentDeck.draw();
+			this.currentDeck.putBack(this.currentCard);
 		}
 	}
 
@@ -118,10 +130,10 @@ public class Quiz {
 	}
 
 
-
 	private FlashCard currentCard;
-	private Deck currentdeck;
+	private Deck currentDeck;
 	private Deck originalDeck;
+	private Deck incorrectCards;
 	private boolean completeFlag;
 
 	private int correctAnswerCount;

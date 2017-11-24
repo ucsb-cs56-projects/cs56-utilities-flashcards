@@ -354,6 +354,5 @@ public class QuizFrame extends JFrame implements QuizUI {
 	private JPanel cardTextPanel;
 	private JTextField answerTextField;
 	private QuizFrame outer;
-	private Deck incorrectCards;
 	private ArrayList<ActionListener> actionListeners;
 }
