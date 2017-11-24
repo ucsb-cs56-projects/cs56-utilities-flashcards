@@ -46,21 +46,6 @@
     </java>
   </target>
 
- <target name="jws" depends="compile,jar">
-
-   <delete dir="${webRoot}/${projectPath}/jws" />
-   <mkdir dir="${webRoot}/${projectPath}/jws" />
-
-   <copy todir="${jwsDest}" file="dist/${projectName}.jar" />
-   <copy todir="${jwsDest}" >
-       <fileset dir="jws" includes="*.html"/>
-       <fileset dir="jws" includes="*.jnlp"/>
-       <fileset dir="jws" includes="*.png"/>
-       <fileset dir="jws" includes=".htaccess"/>
-   </copy>
-   <echo>Java web start at ${jwsURL}</echo>
- </target>
-
   <target name="clean" >
     <defaultexcludes remove="**/*~" />
     <delete>
@@ -120,37 +105,6 @@
        </manifest>
    </jar>
    <signjar jar="dist/${projectName}.jar" alias="flashcardapp" keystore="keystore/flashcardapp.store" storepass="fl@sh!"/> 
- </target>
-
- <target name="publish" depends="jar,jws,javadoc">
-   <mkdir dir="${webRoot}/${projectPath}" />
-
-   <delete dir="${webRoot}/${projectPath}/browse" />
-   <mkdir dir="${webRoot}/${projectPath}/browse" />
-
-   <delete dir="${webRoot}/${projectPath}/download" />
-   <mkdir dir="${webRoot}/${projectPath}/download" />
-
-   <copy file="html/index.html" todir="${webRoot}/${projectPath}"/>
-   <copy file="numberedsource.txt" todir="${webRoot}/${projectPath}/browse"/> 
-
-   <copy todir="${webRoot}/${projectPath}/download" >
-     <fileset dir="download"/>
-     <fileset dir="dist" />
-   </copy>
-
-   <copy file="build.xml" todir="${webRoot}/${projectPath}/browse"/>
-
-   <copy todir="${webRoot}/${projectPath}/browse/src" >
-     <fileset dir="src"/>
-   </copy>
-
-
-
-   <chmod dir="${webRoot}/${projectPath}"
-	  perm="755" type="both" includes="**/*"/>
-
-   <echo>Project published to ${webBaseUrl}/${projectPath}</echo>
  </target>
 
 </project>
