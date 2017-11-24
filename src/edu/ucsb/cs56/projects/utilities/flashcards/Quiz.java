@@ -110,13 +110,16 @@ public class Quiz {
 			this.answerCount = 0;
 			if (option.equals("Hard Reset")) {
 				this.currentDeck = originalDeck;
+
 			} else if (option.equals("Subdeck Reset")) {
 				this.currentDeck = incorrectCards;
+				incorrectCards = new Deck();
 			}
 			//Soft Reset doesn't do anything extra
-			incorrectCards.empty();
 			this.currentDeck.shuffle();
-			this.currentCard = this.currentDeck.draw();
+			if(currentDeck.getSize() != 0) {
+				this.currentCard = this.currentDeck.draw();
+			}
 			this.currentDeck.putBack(this.currentCard);
 		}
 	}

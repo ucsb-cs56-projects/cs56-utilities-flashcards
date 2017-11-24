@@ -282,7 +282,6 @@ public class QuizFrame extends JFrame implements QuizUI {
 	public class RestartButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			outer.controller.restartQuiz();
-			outer.showQuizState();
 		}
 	}
 
