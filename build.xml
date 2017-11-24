@@ -89,34 +89,28 @@
 
    </junit>
   </target>
- <target name="javadoc" depends="compile">
 
-   <delete dir="javadoc" quiet="true" />
-   <javadoc  destdir="javadoc" author="true" version="true" use="true" >
-      <fileset dir="src" includes="**/*.java"/>
+  <property name="javadoc_path" location="javadoc"/>
+
+  <target name="javadoc" depends="compile">
+    <delete quiet="true">
+      <fileset dir="javadoc" />
+    </delete>
+    <javadoc destdir="javadoc">
+      <fileset dir="src/edu/ucsb/cs56/projects/utilities/flashcards" >
+	      <include name="*.java"/>
+      </fileset>
       <classpath refid="project.class.path" />
-
-   </javadoc>
-
-   <!-- delete the old javadoc -->
-   <delete quiet="true" dir="${javadocDest}" />
-
-   <!-- copy everything you just made to the javadoc destination, and then make it readable -->
-
-   <copy todir="${javadocDest}" >
-     <fileset dir="javadoc"/>
-   </copy>
-
-   <!-- Note: this only does the chmod command on the
-        javadoc subdirectory and its contents.  You MIGHT have to
-	MANUALLY do the chmod on the parent directories.  However,
-	you should only need to do that once. -->
-
-   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />
-   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />
-   <echo>Javadoc deployed to ${javadocURL}</echo>
-
- </target>
+      <link href="https://docs.oracle.com/javase/8/docs/api/" />
+    </javadoc>
+    <echo>
+      javadoc written to file://${javadoc_path}/index.html
+    </echo>
+    <echo>
+      TO PUBLISH: cd into that repo, then git add javadoc;
+        git commit -m "update javadoc"; git push origin master
+    </echo>
+  </target>
 
  <target name="jar" depends="compile">
    <mkdir dir="dist" />
