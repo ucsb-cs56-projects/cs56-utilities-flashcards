@@ -7,9 +7,9 @@ public class Quiz {
 	 * @param deck The deck to be quizzed on
 	 */
 	public Quiz(Deck deck) {
-		this.deck = deck;
-		this.currentCard = this.deck.draw();
-		this.deck.putBack(currentCard);
+		this.currentdeck = deck;
+		this.currentCard = this.currentdeck.draw();
+		this.currentdeck.putBack(currentCard);
 		this.restart();
 	}
 
@@ -34,7 +34,7 @@ public class Quiz {
 	 * @return The index of the current card
 	 */
 	public int getCurrentCardNum() {
-		if(answerCount < deck.getSize())
+		if(answerCount < currentdeck.getSize())
 			return this.answerCount+1;
 		else
 			return this.answerCount;
@@ -45,7 +45,7 @@ public class Quiz {
 	 * @return The deck's size
 	 */
 	public int getDeckSize() {
-		return this.deck.getSize();
+		return this.currentdeck.getSize();
 	}
 
 	/**
@@ -73,10 +73,10 @@ public class Quiz {
 			}
 
 			this.answerCount += 1;
-			this.currentCard = this.deck.draw();
-			this.deck.putBack(this.currentCard);
+			this.currentCard = this.currentdeck.draw();
+			this.currentdeck.putBack(this.currentCard);
 
-			if(this.answerCount == this.deck.getSize())
+			if(this.answerCount == this.currentdeck.getSize())
 				this.completeFlag = true;
 
 			return correctAnswer;
@@ -92,13 +92,21 @@ public class Quiz {
 	/**
 	 * Method for restarting the quiz
 	 */
-	public void restart() {
-		this.completeFlag = false;
-		this.correctAnswerCount = 0;
-		this.answerCount = 0;
-		this.deck.shuffle();
-		this.currentCard = this.deck.draw();
-		this.deck.putBack(this.currentCard);
+	public void restart(String option) {
+		if(option.equals("Soft Reset")) {
+			this.completeFlag = false;
+			this.correctAnswerCount = 0;
+			this.answerCount = 0;
+			this.currentdeck.shuffle();
+			this.currentCard = this.currentdeck.draw();
+			this.currentdeck.putBack(this.currentCard);
+		}
+		else if(option.equals("Hard Reset")) {
+
+		}
+		else if(option.equals("Subdeck Reset")){
+
+		}
 	}
 
 	/**
@@ -112,7 +120,8 @@ public class Quiz {
 
 
 	private FlashCard currentCard;
-	private Deck deck;
+	private Deck currentdeck;
+	private Deck originalDeck;
 	private boolean completeFlag;
 
 	private int correctAnswerCount;

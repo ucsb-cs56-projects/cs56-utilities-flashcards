@@ -79,11 +79,18 @@ public class QuizController {
      * Method for restarting the quiz
      */
     public void restartQuiz() {
+        if(quizIsComplete()){
+
+        }
+        else{
+
+        }
         this.quiz.restart();
         this.quizUI.quizStateChanged();
     }
 
-
+    private final static String defaultOptions = {"Complete Deck", "Current Deck"};
+    private final static String endOfQuizOptions = {"Complete Deck", "Current Deck", "Incorrect Cards"};
     private Quiz quiz;
     private QuizUI quizUI;
 }
