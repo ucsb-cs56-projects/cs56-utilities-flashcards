@@ -31,7 +31,7 @@
          <pathelement location="lib/junit-4.8.2.jar"/>
   </path>
 
-  <target name="compile" >
+  <target name="compile" description="Compiles the project">
     <mkdir dir="build" />
     <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,source"
 	   includeantruntime="false">
@@ -40,13 +40,13 @@
 
   </target>
 
-  <target name="run" depends="compile">
+  <target name="run" depends="compile" description="Runs the project through the main method in FlashCardApplication">
     <java classname="${mainClass}"  fork="true">
        <classpath refid="project.class.path" />
     </java>
   </target>
 
-  <target name="clean" >
+  <target name="clean" description="Removes the build, javadoc, dist, and temp directories">
     <defaultexcludes remove="**/*~" />
     <delete>
       <fileset dir="." includes="**/*~"/>
@@ -58,7 +58,7 @@
     <delete dir="temp" quiet="true" />
   </target>
 
-  <target name="test" depends="compile">
+  <target name="test" depends="compile" description="Runs the JUnitTests in the Test classes">
 
    <junit haltonerror="no" haltonfailure="no">
        <classpath refid="project.class.path" />
@@ -77,7 +77,7 @@
 
   <property name="javadoc_path" location="javadoc"/>
 
-  <target name="javadoc" depends="compile">
+  <target name="javadoc" depends="compile" description="Compiles the javadoc and publishes it to a github page">
     <delete quiet="true">
       <fileset dir="javadoc" />
     </delete>
@@ -97,7 +97,7 @@
     </echo>
   </target>
 
- <target name="jar" depends="compile">
+ <target name="jar" depends="compile" description="Makes a jar file that runs this project">
    <mkdir dir="dist" />
    <jar destfile="dist/${projectName}.jar" basedir="build" >
        <manifest>
