@@ -2,6 +2,8 @@ package edu.ucsb.cs56.projects.utilities.flashcards;
 
 
 public class Quiz {
+
+    SoundController soundSource = new SoundController();
 	/**
 	 * Contructor for Quiz Mode
 	 * @param deck The deck to be quizzed on
@@ -67,10 +69,12 @@ public class Quiz {
 		if(!this.isComplete()) {
 			String correctAnswer;
 			if(this.currentCard.getBackText().toLowerCase().equals(backText.toLowerCase())) {
+                soundSource.playSuccess();
 				correctAnswer = backText;
 				this.correctAnswerCount += 1;
 			}
 			else {
+                soundSource.playFail();
 				incorrectCards.putBack(currentCard);
 				correctAnswer = currentCard.getBackText();
 			}
@@ -91,6 +95,7 @@ public class Quiz {
 	 * Method for incrementing the correctAnswerCount when an Override action is submitted
 	 */
 	public void override(){
+        soundSource.playSuccess();
 		incorrectCards.pop();
 		correctAnswerCount++;
 	}
