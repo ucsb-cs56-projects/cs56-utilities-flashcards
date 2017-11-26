@@ -315,7 +315,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 		public void actionPerformed(ActionEvent e){
 			//TODO OverrideButton Listener
 			outer.controller.override();
-
+			outer.overrideButton.setEnabled(false);
 			if(outer.controller.quizIsComplete()){
 
 				int score = outer.controller.getScore();
