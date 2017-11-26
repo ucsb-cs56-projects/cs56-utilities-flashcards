@@ -12,15 +12,14 @@ public class SoundController {
 	AudioInputStream successStream;
 	Clip success;
 
-	File failFile;
+	File failFile = new File("media/fail.wav");
 	AudioInputStream failStream;
 	Clip fail;
 
     /**
      * Contructor that connects sound streams to files and opens them.
      */
-	public SoundController() {	
-		failFile = new File("media/fail.wav");
+	public SoundController() {
 		try {
 			successStream = AudioSystem.getAudioInputStream(successFile);
 			success = AudioSystem.getClip();

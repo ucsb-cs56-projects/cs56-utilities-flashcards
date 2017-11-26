@@ -315,15 +315,15 @@ public class QuizFrame extends JFrame implements QuizUI {
 		public void actionPerformed(ActionEvent e){
 			//TODO OverrideButton Listener
 			outer.controller.override();
-			outer.answerResultLabel = new JLabel("Correct!");
-			outer.answerResultLabel.setForeground(Color.green);
-			if(!outer.controller.quizIsComplete())
-				super.actionPerformed(e);
-			else {
-				outer.overrideButton.setEnabled(false);
+
+			if(outer.controller.quizIsComplete()){
+
 				int score = outer.controller.getScore();
 				int possibleScore = outer.controller.getPossibleScore();
 				outer.scoreLabel.setText(String.format("Score: %d/%d", score, possibleScore));
+			}
+			else{
+				super.actionPerformed(e);
 			}
 		}
 	}
