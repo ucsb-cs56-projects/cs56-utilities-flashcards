@@ -9,11 +9,11 @@ Updated By: Brian Lim and Christopher Alsheikh
 
 ![Menu Screenshot](media/CreateDeck.png "Create a Deck Menu screenshot")
 
-- create cards
-- shuffle cards
-- flip cards to the back and front
-- view next card
-- save decks of cards
+- Create your own cards with custom input
+- Shuffle deck to randomize card order
+- Flip cards to the back and front
+- View the next card in the deck
+- Save decks of cards to load later
 
 ## Modes:
 ### Study mode: Review and flip cards to become familiar with the information on them.
