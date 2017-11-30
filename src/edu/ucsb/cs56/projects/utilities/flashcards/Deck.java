@@ -78,6 +78,13 @@ public class Deck  implements Serializable {
     }
 
     /**
+     * Pops the last card out of the deck
+     */
+    public void pop(){
+        this.cards.remove(cards.size()-1);
+    }
+
+    /**
      Draw a single card from the deck and return it
      @return The card drawn from the top of the deck
      */
@@ -100,4 +107,6 @@ public class Deck  implements Serializable {
     public int getSize() {
         return this.cards.size();
     }
+
+    public void empty() {this.cards.clear();}
 }

@@ -31,7 +31,7 @@
          <pathelement location="lib/junit-4.8.2.jar"/>
   </path>
 
-  <target name="compile" >
+  <target name="compile" description="Compiles the project">
     <mkdir dir="build" />
     <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,source"
 	   includeantruntime="false">
@@ -40,28 +40,13 @@
 
   </target>
 
-  <target name="run" depends="compile">
+  <target name="run" depends="compile" description="Runs the project through the main method in FlashCardApplication">
     <java classname="${mainClass}"  fork="true">
        <classpath refid="project.class.path" />
     </java>
   </target>
 
- <target name="jws" depends="compile,jar">
-
-   <delete dir="${webRoot}/${projectPath}/jws" />
-   <mkdir dir="${webRoot}/${projectPath}/jws" />
-
-   <copy todir="${jwsDest}" file="dist/${projectName}.jar" />
-   <copy todir="${jwsDest}" >
-       <fileset dir="jws" includes="*.html"/>
-       <fileset dir="jws" includes="*.jnlp"/>
-       <fileset dir="jws" includes="*.png"/>
-       <fileset dir="jws" includes=".htaccess"/>
-   </copy>
-   <echo>Java web start at ${jwsURL}</echo>
- </target>
-
-  <target name="clean" >
+  <target name="clean" description="Removes the build, javadoc, dist, and temp directories">
     <defaultexcludes remove="**/*~" />
     <delete>
       <fileset dir="." includes="**/*~"/>
@@ -73,7 +58,7 @@
     <delete dir="temp" quiet="true" />
   </target>
 
-  <target name="test" depends="compile">
+  <target name="test" depends="compile" description="Runs the JUnitTests in the Test classes">
 
    <junit haltonerror="no" haltonfailure="no">
        <classpath refid="project.class.path" />
@@ -89,36 +74,30 @@
 
    </junit>
   </target>
- <target name="javadoc" depends="compile">
 
-   <delete dir="javadoc" quiet="true" />
-   <javadoc  destdir="javadoc" author="true" version="true" use="true" >
-      <fileset dir="src" includes="**/*.java"/>
+  <property name="javadoc_path" location="javadoc"/>
+
+  <target name="javadoc" depends="compile" description="Compiles the javadoc and publishes it to a github page">
+    <delete quiet="true">
+      <fileset dir="javadoc" />
+    </delete>
+    <javadoc destdir="javadoc">
+      <fileset dir="src/edu/ucsb/cs56/projects/utilities/flashcards" >
+	      <include name="*.java"/>
+      </fileset>
       <classpath refid="project.class.path" />
+      <link href="https://docs.oracle.com/javase/8/docs/api/" />
+    </javadoc>
+    <echo>
+      javadoc written to file://${javadoc_path}/index.html
+    </echo>
+    <echo>
+      TO PUBLISH: cd into that repo, then git add javadoc;
+        git commit -m "update javadoc"; git push origin master
+    </echo>
+  </target>
 
-   </javadoc>
-
-   <!-- delete the old javadoc -->
-   <delete quiet="true" dir="${javadocDest}" />
-
-   <!-- copy everything you just made to the javadoc destination, and then make it readable -->
-
-   <copy todir="${javadocDest}" >
-     <fileset dir="javadoc"/>
-   </copy>
-
-   <!-- Note: this only does the chmod command on the
-        javadoc subdirectory and its contents.  You MIGHT have to
-	MANUALLY do the chmod on the parent directories.  However,
-	you should only need to do that once. -->
-
-   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />
-   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />
-   <echo>Javadoc deployed to ${javadocURL}</echo>
-
- </target>
-
- <target name="jar" depends="compile">
+ <target name="jar" depends="compile" description="Makes a jar file that runs this project">
    <mkdir dir="dist" />
    <jar destfile="dist/${projectName}.jar" basedir="build" >
        <manifest>
@@ -126,37 +105,6 @@
        </manifest>
    </jar>
    <signjar jar="dist/${projectName}.jar" alias="flashcardapp" keystore="keystore/flashcardapp.store" storepass="fl@sh!"/> 
- </target>
-
- <target name="publish" depends="jar,jws,javadoc">
-   <mkdir dir="${webRoot}/${projectPath}" />
-
-   <delete dir="${webRoot}/${projectPath}/browse" />
-   <mkdir dir="${webRoot}/${projectPath}/browse" />
-
-   <delete dir="${webRoot}/${projectPath}/download" />
-   <mkdir dir="${webRoot}/${projectPath}/download" />
-
-   <copy file="html/index.html" todir="${webRoot}/${projectPath}"/>
-   <copy file="numberedsource.txt" todir="${webRoot}/${projectPath}/browse"/> 
-
-   <copy todir="${webRoot}/${projectPath}/download" >
-     <fileset dir="download"/>
-     <fileset dir="dist" />
-   </copy>
-
-   <copy file="build.xml" todir="${webRoot}/${projectPath}/browse"/>
-
-   <copy todir="${webRoot}/${projectPath}/browse/src" >
-     <fileset dir="src"/>
-   </copy>
-
-
-
-   <chmod dir="${webRoot}/${projectPath}"
-	  perm="755" type="both" includes="**/*"/>
-
-   <echo>Project published to ${webBaseUrl}/${projectPath}</echo>
  </target>
 
 </project>

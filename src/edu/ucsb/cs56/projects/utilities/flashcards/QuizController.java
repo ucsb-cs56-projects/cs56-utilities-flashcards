@@ -1,5 +1,6 @@
 package edu.ucsb.cs56.projects.utilities.flashcards;
 
+import javax.swing.JOptionPane;
 
 public class QuizController {
     /**
@@ -79,11 +80,41 @@ public class QuizController {
      * Method for restarting the quiz
      */
     public void restartQuiz() {
-        this.quiz.restart();
-        this.quizUI.quizStateChanged();
+        String option = "Hard Reset";
+        int response;
+        if(quizIsComplete()){
+            response = JOptionPane.showOptionDialog(null, "Where do you want to restart the quiz to?", "Restart Menu",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, endOfQuizOptions, endOfQuizOptions[0]);
+        }
+        else{
+            response = JOptionPane.showOptionDialog(null, "Where do you want to restart the quiz to?", "Restart Menu",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    null, defaultOptions, defaultOptions[0]);
+            response++;
+        }
+        switch(response){
+            case 0:
+                option = "Subdeck Reset";
+                break;
+            case 1:
+                option = "Hard Reset";
+                break;
+            case 2:
+                option = "Soft Reset";
+                break;
+            default:
+                option = "Invalid Option";
+                break;
+        }
+        if(response != 3) {
+            this.quiz.restart(option);
+            this.quizUI.quizStateChanged();
+        }
     }
 
-
+    private final static String[] defaultOptions = {"Complete Deck", "Current Deck", "Cancel"};
+    private final static String[] endOfQuizOptions = {"Incorrect Cards", "Complete Deck", "Current Deck", "Cancel"};
     private Quiz quiz;
     private QuizUI quizUI;
 }

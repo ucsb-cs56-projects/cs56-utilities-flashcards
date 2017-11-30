@@ -2,15 +2,19 @@ package edu.ucsb.cs56.projects.utilities.flashcards;
 
 
 public class Quiz {
+
+    SoundController soundSource = new SoundController();
 	/**
 	 * Contructor for Quiz Mode
 	 * @param deck The deck to be quizzed on
 	 */
 	public Quiz(Deck deck) {
-		this.deck = deck;
-		this.currentCard = this.deck.draw();
-		this.deck.putBack(currentCard);
-		this.restart();
+		this.currentDeck = deck;
+		this.originalDeck = deck;
+		this.currentCard = this.currentDeck.draw();
+		this.currentDeck.putBack(currentCard);
+		this.incorrectCards = new Deck();
+		this.restart("Soft Reset");
 	}
 
 	/**
@@ -34,7 +38,7 @@ public class Quiz {
 	 * @return The index of the current card
 	 */
 	public int getCurrentCardNum() {
-		if(answerCount < deck.getSize())
+		if(answerCount < currentDeck.getSize())
 			return this.answerCount+1;
 		else
 			return this.answerCount;
@@ -45,7 +49,7 @@ public class Quiz {
 	 * @return The deck's size
 	 */
 	public int getDeckSize() {
-		return this.deck.getSize();
+		return this.currentDeck.getSize();
 	}
 
 	/**
@@ -65,18 +69,21 @@ public class Quiz {
 		if(!this.isComplete()) {
 			String correctAnswer;
 			if(this.currentCard.getBackText().toLowerCase().equals(backText.toLowerCase())) {
+                soundSource.playSuccess();
 				correctAnswer = backText;
 				this.correctAnswerCount += 1;
 			}
 			else {
+                soundSource.playFail();
+				incorrectCards.putBack(currentCard);
 				correctAnswer = currentCard.getBackText();
 			}
 
 			this.answerCount += 1;
-			this.currentCard = this.deck.draw();
-			this.deck.putBack(this.currentCard);
+			this.currentCard = this.currentDeck.draw();
+			this.currentDeck.putBack(this.currentCard);
 
-			if(this.answerCount == this.deck.getSize())
+			if(this.answerCount == this.currentDeck.getSize())
 				this.completeFlag = true;
 
 			return correctAnswer;
@@ -87,18 +94,39 @@ public class Quiz {
 	/**
 	 * Method for incrementing the correctAnswerCount when an Override action is submitted
 	 */
-	public void override(){correctAnswerCount++;}
+	public void override(){
+        soundSource.playSuccess();
+		incorrectCards.pop();
+		correctAnswerCount++;
+	}
 
 	/**
 	 * Method for restarting the quiz
+	 *
+	 * Options:
+	 * 		Hard Reset - Resets to beginning of the entire quiz session
+	 *		Subdeck Reset - Resets to a subdeck of incorrect cards
+	 * 		Soft Reset - Resets to beginning of current subdeck
 	 */
-	public void restart() {
-		this.completeFlag = false;
-		this.correctAnswerCount = 0;
-		this.answerCount = 0;
-		this.deck.shuffle();
-		this.currentCard = this.deck.draw();
-		this.deck.putBack(this.currentCard);
+	public void restart(String option) {
+		if(option != "Invalid Option") {
+			this.completeFlag = false;
+			this.correctAnswerCount = 0;
+			this.answerCount = 0;
+			if (option.equals("Hard Reset")) {
+				this.currentDeck = originalDeck;
+
+			} else if (option.equals("Subdeck Reset")) {
+				this.currentDeck = incorrectCards;
+				incorrectCards = new Deck();
+			}
+			//Soft Reset doesn't do anything extra
+			this.currentDeck.shuffle();
+			if(currentDeck.getSize() != 0) {
+				this.currentCard = this.currentDeck.draw();
+			}
+			this.currentDeck.putBack(this.currentCard);
+		}
 	}
 
 	/**
@@ -110,9 +138,10 @@ public class Quiz {
 	}
 
 
-
 	private FlashCard currentCard;
-	private Deck deck;
+	private Deck currentDeck;
+	private Deck originalDeck;
+	private Deck incorrectCards;
 	private boolean completeFlag;
 
 	private int correctAnswerCount;

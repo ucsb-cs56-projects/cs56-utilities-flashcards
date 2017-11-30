@@ -70,5 +70,19 @@ public class DeckTest {
         assertEquals(expResult, result);
     }
 
+    /**
+     * Test of pop method, of class Deck
+     */
+    @Test
+    public void testPop(){
+        System.out.println("Pop");
+        Deck instance = new Deck();
+        for(int i=0; i<100; i++){
+            FlashCard card = new FlashCard(""+i,""+i);
+            instance.putBack(card);
+        }
+        instance.pop();
+        assertEquals(99, instance.getSize());
+    }
 
 }
