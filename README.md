@@ -24,4 +24,9 @@ Updated By: Brian Lim and Christopher Alsheikh
 ![Quiz Screenshot](media/Quiz.png "Study Menu")
 
 
+# F17 Final Remarks:
+This is a relatively unedited legacy code project compared to the others. I believe we might be the first team besides the creators to work on this project. There is still a lot of work to be done, with a lot of refactoring with the various inner classes. To get started on the code, make sure you know how all the classes are linked. That was the hardest part for us when starting work on this project.
 
+One of the features we would like to see in the future is a more robust answer checking system. Currently, all it does is get rid of casing and compare to see if the strings are equal. Another thing is that this app would be really useful on Android, and porting it over to that, while ambitious, seems like the direction this project is heading right now.
+
+There is one bug that might hinder progress when working on this project. If the quiz mode does not show up, comment out all code in the Quiz related classes that have to do with sound. We are not sure why this happens.
