@@ -1,7 +1,7 @@
 Adam Farnsworth
 Myles Adams
 
-###### a) A brief description of the project. Here, I’m looking for a short description: probably 1 sentence, 2-3 at most.
+###### **a)** A brief description of the project. Here, I’m looking for a short description: probably 1 sentence, 2-3 at most.
 The project is a flash card simulator for studying.  It can create, cards and help to learn new material.
 
 ###### b)  a set of user stories (as a X I can Y so that Z) that describe what the current software in its current state can do.  First, review how User Stories are supposed to be written.
