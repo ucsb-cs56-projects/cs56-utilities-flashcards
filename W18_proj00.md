@@ -18,12 +18,12 @@ The readme could be more descriptive of the program.  It may be because the prog
 
 ###### f) An assessment of the current state of the build.xml file if applicable, or if the project has been converted to Maven or Gradle, note this. If it’s based on Ant, Are there targets that need descriptions? Is there old legacy JWS stuff that needs to be removed? (More on this below). It it’s based on Maven or Gradle, is there sufficient documentation in the README.md that someone new to those tools has the information they need to get started?
 ant is well maintained and has little to no work that needs to be done for it, bellow is what's available:
-*clean    Removes the build, javadoc, dist, and temp directories
-*compile  Compiles the project
-*jar      Makes a jar file that runs this project
-*javadoc  Compiles the javadoc and publishes it to a github page
-*run      Runs the project through the main method in FlashCardApplication
-*test     Runs the JUnitTests in the Test classes 
+..*clean    Removes the build, javadoc, dist, and temp directories
+..*compile  Compiles the project
+..*jar      Makes a jar file that runs this project
+..*javadoc  Compiles the javadoc and publishes it to a github page
+..*run      Runs the project through the main method in FlashCardApplication
+..*test     Runs the JUnitTests in the Test classes 
 
 ###### g) An assessment of the current “issues”. Are there enough issues that you could earn 1000 points by working on this project? Are the issues clear in terms of what the expectations are?
 There are a good amount of issues like being unable to launch with sound.  In addion, there are many features that could be added like the mute button.  There should be enough work to earn 1000 points, and the expectaions are clear.
