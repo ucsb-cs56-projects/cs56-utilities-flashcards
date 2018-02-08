@@ -18,7 +18,7 @@ The readme could be more descriptive of the program.  It may be because the prog
 
 ###### f) An assessment of the current state of the build.xml file if applicable, or if the project has been converted to Maven or Gradle, note this. If it’s based on Ant, Are there targets that need descriptions? Is there old legacy JWS stuff that needs to be removed? (More on this below). It it’s based on Maven or Gradle, is there sufficient documentation in the README.md that someone new to those tools has the information they need to get started?
 ant is well maintained and has little to no work that needs to be done for it, bellow is what's available:
-..* clean    Removes the build, javadoc, dist, and temp directories
+⋅⋅* clean    Removes the build, javadoc, dist, and temp directories
 ..* compile  Compiles the project
 ..* jar      Makes a jar file that runs this project
 ..* javadoc  Compiles the javadoc and publishes it to a github page
