@@ -23,6 +23,6 @@ g) There are a good amount of issues like being unable to launch with sound.  In
 
 h) There are many features that can be added to enhance the program like a better gui, cross platform capability, and adding sound that actually works.
 
-i)
+i) The classes are names well, and their purposes are to modify: the Deck, Flash card, and Quiz.  They have started on the sound controller as the next classes to implement.  Some of the code is written and commented legibly, other parts need some improvment.  
 
 j)
