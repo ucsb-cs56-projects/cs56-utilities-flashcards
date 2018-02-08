@@ -1,8 +1,7 @@
 Adam Farnsworth
 Myles Adams
 
-###### a) A brief description of the project. Here, I’m looking for a short description: probably 1 sentence, 2-3 at most.
-The project is a flash card simulator for studying.  It can create, cards and help to learn new material.
+a) The project is a flash card simulator for studying.  It can create, cards and help to learn new material.
 
 b) As a user I can create cards with custom input so that I can enter questions and answers.  As a user i can shuffle the deck, flip cards to the front and back, view the next card in the deck, save decks of cars to the loader so that I can study efficiently.
 
@@ -24,6 +23,7 @@ g) There are a good amount of issues like being unable to launch with sound.  In
 
 h) There are many features that can be added to enhance the program like a better gui, cross platform capability, and adding sound that actually works.
 
-i) The classes are named well, and their purposes are to modify: the Deck, Flash card, and Quiz.  They have started on the sound controller as the next classes to implement.  Some of the code is written and commented legibly, other parts need some improvment.  
+i) The classes are named well, and their purposes are to modify: the Deck, Flash card, and Quiz.  They have started on the sound controller as the next classes to implement.  Some of the code is written and commented legibly, other parts need some improvment. In general, the code is pretty easy to understand though, its pretty well self-documented. Most of the class names are good except there is one that I think is poorly named, CreateDeckFrame.java.
 
 j)
+There is two testing classes, DeckTest.java and FlashCardTest.java. They are not very extensive but seem to cover the basic uses for the Deck and FlashCard. They don't test any of the other classes individually but I guess they just test them through the FlashCard and Deck tests. If those run, then they are assuming that all the other classes that those implement work properly.
