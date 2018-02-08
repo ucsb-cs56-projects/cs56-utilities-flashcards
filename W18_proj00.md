@@ -1,7 +1,8 @@
 Adam Farnsworth
 Myles Adams
 
-a) The project is a flash card simulator for studying.  It can create, cards and help to learn new material.
+###### a) A brief description of the project. Here, I’m looking for a short description: probably 1 sentence, 2-3 at most.
+The project is a flash card simulator for studying.  It can create, cards and help to learn new material.
 
 b) As a user I can create cards with custom input so that I can enter questions and answers.  As a user i can shuffle the deck, flip cards to the front and back, view the next card in the deck, save decks of cars to the loader so that I can study efficiently.
 
