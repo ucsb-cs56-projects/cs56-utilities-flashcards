@@ -23,4 +23,6 @@ g) There are a good amount of issues like being unable to launch with sound.  In
 
 h) There are many features that can be added to enhance the program like a better gui, cross platform capability, and adding sound that actually works.
 
-j) 
+i)
+
+j)
