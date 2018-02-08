@@ -1,7 +1,7 @@
 Adam Farnsworth
 Myles Adams
 
-###### **a)** A brief description of the project. Here, I’m looking for a short description: probably 1 sentence, 2-3 at most.
+###### a) A brief description of the project. Here, I’m looking for a short description: probably 1 sentence, 2-3 at most.
 The project is a flash card simulator for studying.  It can create, cards and help to learn new material.
 
 ###### b)  a set of user stories (as a X I can Y so that Z) that describe what the current software in its current state can do.  First, review how User Stories are supposed to be written.
@@ -17,7 +17,8 @@ As a user I can add a better gui for a more enjoyable study experence so that mo
 The readme could be more descriptive of the program.  It may be because the program does not have much to it, but I belive there is more to this program then the readme says.
 
 ###### f) An assessment of the current state of the build.xml file if applicable, or if the project has been converted to Maven or Gradle, note this. If it’s based on Ant, Are there targets that need descriptions? Is there old legacy JWS stuff that needs to be removed? (More on this below). It it’s based on Maven or Gradle, is there sufficient documentation in the README.md that someone new to those tools has the information they need to get started?
-ant is well maintained and has little to no work that needs to be done for it, bellow is what's available:
+ant is well maintained and has little to no work that needs to be done for it, bellow is what's available
+
 ⋅⋅* clean    Removes the build, javadoc, dist, and temp directories
 ..* compile  Compiles the project
 ..* jar      Makes a jar file that runs this project
