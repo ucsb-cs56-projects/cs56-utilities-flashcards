@@ -36,7 +36,8 @@ public class FlashCardApplication {
 			else if(ev.getActionCommand().equals("LoadDeck")) {
 				deck = mainMenu.getDeck();
 				outer.showDeckMenu();
-			}
+			} else
+				mainMenu.setVisible(true);		//this occurs when ev.getActionCommand().equals("LoadFail")
 		}
 	}
 

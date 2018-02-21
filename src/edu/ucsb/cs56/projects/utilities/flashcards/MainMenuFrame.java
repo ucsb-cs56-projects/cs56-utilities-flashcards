@@ -7,20 +7,19 @@ import java.awt.event.*;
 import javax.swing.border.*;
 import java.util.ArrayList;
 
-public class MainMenuFrame extends JFrame  {
+public class MainMenuFrame extends JFrame {
 	/**
-	 * Default constructor for the Main Menu JFrame that loads or creates a new deck of cards
+	 * Default constructor for the Main Menu JFrame that loads or creates a new
+	 * deck of cards
 	 */
-	public MainMenuFrame () {
+	public MainMenuFrame() {
 		super("Flash Cards!");
 		this.outer = this;
 
 		JPanel contentPanel = new JPanel();
 		this.setContentPane(contentPanel);
-		contentPanel.setBorder(new EmptyBorder(10,20,10,20));
+		contentPanel.setBorder(new EmptyBorder(10, 20, 10, 20));
 		this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
-
-
 
 		this.welcomeLabel = new JLabel("Load an existing deck, or create a new one.");
 
@@ -45,7 +44,9 @@ public class MainMenuFrame extends JFrame  {
 
 	/**
 	 * Method to add an action listener to the JFrame
-	 * @param listener an ActionListener
+	 * 
+	 * @param listener
+	 *            an ActionListener
 	 */
 	public void addActionListener(ActionListener listener) {
 		this.actionListeners.add(listener);
@@ -53,19 +54,19 @@ public class MainMenuFrame extends JFrame  {
 
 	/**
 	 * Method for loading a file that contains flashcards
-	 * @param fileName The name of the File
+	 * 
+	 * @param fileName
+	 *            The name of the File
 	 * @return A Deck that contains the flashcards that the saved file contained
 	 */
 	public Deck loadDeck(String fileName) {
 		try {
 			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileName));
-			Deck deck = (Deck)inStream.readObject();
+			Deck deck = (Deck) inStream.readObject();
 			return deck;
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(this, "Error:" + e,
-					"Error loading deck.",
-					JOptionPane.ERROR_MESSAGE
-			);
+			JOptionPane.showMessageDialog(this, "Error:" + e, 
+					"Error loading deck.", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 		return null;
@@ -79,12 +80,15 @@ public class MainMenuFrame extends JFrame  {
 			try {
 				JFileChooser chooser = new JFileChooser();
 				int returnVal = chooser.showDialog(outer, "Load Deck");
-				if(returnVal == JFileChooser.APPROVE_OPTION) {
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					outer.deck = outer.loadDeck(chooser.getSelectedFile().getCanonicalPath());
-					outer.notifyDeckFinished();
+					if (deck == null)
+						outer.notifyDeckFailed();	//loading deck failed
+					else
+						outer.notifyDeckFinished();	//loading deck passed
 				}
+			} catch (Exception e) {
 			}
-			catch (Exception e) { }
 		}
 	}
 
@@ -94,13 +98,14 @@ public class MainMenuFrame extends JFrame  {
 	public class CreateButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			e = new ActionEvent(outer, 0, "CreateDeck");
-			for(ActionListener l : outer.actionListeners)
+			for (ActionListener l : outer.actionListeners)
 				l.actionPerformed(e);
 		}
 	}
 
 	/**
 	 * Getter for the deck
+	 * 
 	 * @return the Deck
 	 */
 	public Deck getDeck() {
@@ -108,20 +113,35 @@ public class MainMenuFrame extends JFrame  {
 	}
 
 	/**
-	 * Method for telling the actionListeners that Loading or Creating a deck has finished
+	 * Method for telling the actionListeners that Loading or Creating a deck
+	 * has finished
 	 */
 	public void notifyDeckFinished() {
-		ActionEvent e = new ActionEvent(outer, 0, "LoadDeck");
-		for(ActionListener l : this.actionListeners)
+		ActionEvent e = new ActionEvent(outer, 0, "LoadDeck"); 
+																
+		for (ActionListener l : this.actionListeners)
+			l.actionPerformed(e);
+
+	}
+
+	/**
+	 * Method for telling the actionListeners that Loading a deck has failed
+	 */
+	public void notifyDeckFailed() {
+		ActionEvent e = new ActionEvent(outer, 0, "LoadFailed"); 
+																	
+																	
+		for (ActionListener l : this.actionListeners)
 			l.actionPerformed(e);
 
 	}
 
 	/**
 	 * Main function for testing the MainMenu JFrame
+	 * 
 	 * @param args
 	 */
-	public static void main(String [] args) {
+	public static void main(String[] args) {
 		MainMenuFrame frame = new MainMenuFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
