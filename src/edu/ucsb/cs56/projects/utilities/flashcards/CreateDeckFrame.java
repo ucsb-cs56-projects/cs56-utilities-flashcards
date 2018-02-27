@@ -6,7 +6,6 @@ import java.io.*;
 import java.awt.event.*;
 import javax.swing.border.*;
 import java.util.ArrayList;
-import javafx.*;
 
 public class CreateDeckFrame extends JFrame {
 

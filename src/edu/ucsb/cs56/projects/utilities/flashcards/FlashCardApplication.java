@@ -2,6 +2,7 @@ package edu.ucsb.cs56.projects.utilities.flashcards;
 
 import javax.swing.JFrame;
 import java.awt.event.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,9 +54,17 @@ public class FlashCardApplication {
 				createFrame.setVisible(false);
 			}
 			else if(ev.getActionCommand().equals("MainMenu")){
-				createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				createFrame.setVisible(false);
-				outer.showMainMenu();
+				JFrame checkMain = new JFrame("Are you sure?");
+				int confirmed = JOptionPane.showConfirmDialog(null,
+						"Going to main menu will not save current deck, are you sure you want to continue" +
+								"?", "Main Menu Message Box",
+						JOptionPane.YES_NO_OPTION);
+
+				if (confirmed == JOptionPane.YES_OPTION) {
+					createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					createFrame.setVisible(false);
+					outer.showMainMenu();
+				}
 			}
 		}
 	}
