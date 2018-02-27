@@ -100,6 +100,95 @@ public class CreateDeckFrame extends JFrame {
 		this.actionListeners = new ArrayList<ActionListener>();
 	}
 
+	public CreateDeckFrame(Deck deck) {
+		super("Create a new deck");
+//		Deck newDeck = outer.getDeck();
+		this.outer = this;
+
+		JPanel contentPanel = new JPanel();
+		this.setContentPane(contentPanel);
+		contentPanel.setBorder(new EmptyBorder(10, 20, 50, 20));
+
+		BoxLayout layout = new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS);
+		this.setLayout(layout);
+
+		this.positionLabel = new JLabel("# of #");
+		this.positionLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		this.positionLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		this.add(this.positionLabel);
+
+		this.cardTextPanel = new JPanel();
+		this.cardTextPanel.setBorder(new LineBorder(Color.black));
+		this.cardTextPanel.setPreferredSize(new Dimension(500, 300));
+		this.cardTextPanel.setMinimumSize(new Dimension(500, 300));
+		this.cardTextPanel.setBackground(Color.white);
+		this.cardTextPanel.setLayout(new GridLayout(1, 1));
+
+		this.cardTextLabel = new JLabel();
+		this.cardTextLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		this.cardTextLabel.setBackground(Color.white);
+		this.cardTextLabel.setFont(new Font("Courier New", Font.BOLD, 20));
+		this.cardTextLabel.setText("Card Front Text");
+		this.cardTextPanel.add(this.cardTextLabel);
+
+		this.add(this.cardTextPanel);
+
+		JPanel buttonPanel = new JPanel();
+
+		this.flipCardButton = createToggleButton("Flip");
+		this.flipCardButton.addActionListener(new FlipCardButtonListener());
+		buttonPanel.add(this.flipCardButton);
+
+		this.editCardButton = createButton("Edit");
+		this.editCardButton.addActionListener(new EditCardButtonListener());
+		buttonPanel.add(this.editCardButton);
+
+		this.nextCardButton = createButton("Next Card");
+		this.nextCardButton.addActionListener(new NextCardButtonListener());
+		buttonPanel.add(this.nextCardButton);
+
+		this.add(buttonPanel);
+
+		this.newCardButton = createButton("New Card", 150);
+		this.newCardButton.addActionListener(new NewCardButtonListener());
+
+		this.saveButton = createButton("Save", 150);
+		this.saveButton.addActionListener(new SaveButtonListener());
+
+		this.mainMenuButton = createButton("Main Menu", 150);
+		this.mainMenuButton.addActionListener(new MainMenuButtonListener());
+
+		JPanel newCardPanel = new JPanel();
+		newCardPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+		newCardPanel.add(this.newCardButton);
+
+		JPanel savePanel = new JPanel();
+		savePanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+		savePanel.add(this.saveButton);
+
+		JPanel mainMenuPanel = new JPanel();
+		mainMenuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+		mainMenuPanel.add(this.mainMenuButton);
+
+		buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1, 3));
+		buttonPanel.add(newCardPanel);
+		buttonPanel.add(mainMenuPanel);
+		buttonPanel.add(savePanel);
+		buttonPanel.setBorder(new EmptyBorder(25, 0, 0, 0));
+		this.add(buttonPanel);
+
+		this.pack();
+
+		this.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
+		this.newDeck = deck;
+		this.currentCard = this.newDeck.draw();
+		this.flippedFlag = false;
+		this.showCard();
+		this.actionListeners = new ArrayList<ActionListener>();
+	}
+
 	/**
 	 * Method for showing the text for the card on the screen
 	 */

@@ -16,6 +16,7 @@ public class DeckMenuFrame extends JFrame {
 		JButton quizButton;
 		JButton studyButton;
 		JButton mainMenuButton;
+		JButton editButton;
 
 		this.outer = this;
 
@@ -37,6 +38,10 @@ public class DeckMenuFrame extends JFrame {
 		studyButton = new JButton("Study");
 		studyButton.addActionListener(new StudyButtonListener());
 		buttonPanel.add(studyButton);
+
+		editButton = new JButton("Edit");
+		editButton.addActionListener(new EditButtonListener());
+		buttonPanel.add(editButton);
 
 		mainMenuButton = new JButton("Main Menu");
 		mainMenuButton.addActionListener(new MainMenuButtonListener());
@@ -83,6 +88,17 @@ public class DeckMenuFrame extends JFrame {
 	public class StudyButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			ev = new ActionEvent(outer, 0, "StudyModeSelected");
+			for(ActionListener listener: outer.actionListeners)
+				listener.actionPerformed(ev);
+		}
+	}
+
+	/**
+	 * A Button Listener for the "Edit" Button
+	 */
+	public class EditButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			ev = new ActionEvent(outer, 0, "EditModeSelected");
 			for(ActionListener listener: outer.actionListeners)
 				listener.actionPerformed(ev);
 		}

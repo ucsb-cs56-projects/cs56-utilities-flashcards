@@ -81,6 +81,7 @@ public class MainMenuFrame extends JFrame {
 				JFileChooser chooser = new JFileChooser();
 				int returnVal = chooser.showDialog(outer, "Load Deck");
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					currentFile = chooser.getSelectedFile().toString();
 					outer.deck = outer.loadDeck(chooser.getSelectedFile().getCanonicalPath());
 					if (deck == null)
 						outer.notifyDeckFailed();	//loading deck failed
@@ -152,5 +153,6 @@ public class MainMenuFrame extends JFrame {
 	JLabel welcomeLabel;
 	JButton loadButton;
 	JButton createButton;
+	String currentFile;
 	Deck deck;
 }
