@@ -2,6 +2,8 @@ package edu.ucsb.cs56.projects.utilities.flashcards;
 
 import javax.swing.JFrame;
 import java.awt.event.*;
+import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,7 +38,8 @@ public class FlashCardApplication {
 			else if(ev.getActionCommand().equals("LoadDeck")) {
 				deck = mainMenu.getDeck();
 				outer.showDeckMenu();
-			}
+			} else
+				mainMenu.setVisible(true);		//this occurs when ev.getActionCommand().equals("LoadFail")
 		}
 	}
 
@@ -52,12 +55,48 @@ public class FlashCardApplication {
 				createFrame.setVisible(false);
 			}
 			else if(ev.getActionCommand().equals("MainMenu")){
-				createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-				createFrame.setVisible(false);
-				outer.showMainMenu();
+				JFrame checkMain = new JFrame("Are you sure?");
+				int confirmed = JOptionPane.showConfirmDialog(null,
+						"Going to main menu will not save current deck, are you sure you want to continue" +
+								"?", "Main Menu Message Box",
+						JOptionPane.YES_NO_OPTION);
+
+				if (confirmed == JOptionPane.YES_OPTION) {
+					createFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					createFrame.setVisible(false);
+					outer.showMainMenu();
+				}
 			}
 		}
 	}
+
+	/**
+	 * Listener for the CreateDeck JFrame
+	 */
+	public class EditFrameListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			if(ev.getActionCommand().equals("DeckUpdated")) {
+				deck = editFrame.getDeck();
+				editFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+				outer.showDeckMenu();
+				editFrame.setVisible(false);
+			}
+			else if(ev.getActionCommand().equals("MainMenu")){
+				JFrame checkMain = new JFrame("Are you sure?");
+				int confirmed = JOptionPane.showConfirmDialog(null,
+						"Going to main menu will not save current deck, are you sure you want to continue" +
+								"?", "Main Menu Message Box",
+						JOptionPane.YES_NO_OPTION);
+
+				if (confirmed == JOptionPane.YES_OPTION) {
+					editFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+					editFrame.setVisible(false);
+					outer.showMainMenu();
+				}
+			}
+		}
+	}
+
 
 	/**
 	 * Listener for the DeckMenu JFrame
@@ -82,6 +121,12 @@ public class FlashCardApplication {
 						outer.deck);
 				studyFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				studyFrame.setVisible(true);
+			}
+			else if(cmd.equals("EditModeSelected")) {
+				outer.editFrame = new EditDeckFrame(outer.deck, outer.mainMenu.currentFile);
+				editFrame.addActionListener(new EditFrameListener());
+				editFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				outer.editFrame.setVisible(true);
 			}
 			else if(cmd.equals("MainMenu")){
 				outer.showMainMenu();
@@ -155,9 +200,11 @@ public class FlashCardApplication {
 		FlashCardApplication app = new FlashCardApplication();
 	}
 
+	private String getCurrentFile() { return outer.mainMenu.currentFile; }
 
 	private MainMenuFrame mainMenu;
 	private CreateDeckFrame createFrame;
+	private EditDeckFrame editFrame;
 	private DeckMenuFrame deckMenu;
 	private QuizFrame quizFrame;
 	private DeckStudyFrame studyFrame;
