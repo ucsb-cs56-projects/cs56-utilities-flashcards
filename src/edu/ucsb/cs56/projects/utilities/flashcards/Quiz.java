@@ -1,5 +1,6 @@
 package edu.ucsb.cs56.projects.utilities.flashcards;
 
+import java.util.ArrayList;
 
 public class Quiz {
 
@@ -15,6 +16,13 @@ public class Quiz {
 		this.currentDeck.putBack(currentCard);
 		this.incorrectCards = new Deck();
 		this.restart("Soft Reset");
+	}
+	/**
+	 * Getter for the amount of correct answers so far
+	 * @return The number of correct answers
+	 */
+	public ArrayList<FlashCard>  getWholeDeck() {
+		return this.currentDeck.getDeckList();
 	}
 
 	/**

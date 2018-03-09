@@ -1,8 +1,18 @@
 package edu.ucsb.cs56.projects.utilities.flashcards;
 
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class QuizController {
+    /**
+     * Getter for the current card's text
+     * @return The current card's front text
+     */
+    public ArrayList<FlashCard> getTheDeck() {
+        return this.quiz.getWholeDeck();
+    }
+    
     /**
      * Constructor for the QuizController
      * @param quiz A Quiz Object
@@ -35,6 +45,7 @@ public class QuizController {
     public String getCardText() {
         return this.quiz.getCardText();
     }
+    
 
     /**
      * Getter for the current card's index

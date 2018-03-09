@@ -219,20 +219,6 @@ public class EditDeckFrame extends JFrame{
             else
                 outer.cardNum = 0;
 
-
-            /*
-             * leave this commented out code for now, might fix some next and flip combos later
-             */
-//			if (flipCardButton.isSelected()) {
-//				flippedFlag = false;
-//				flipCardButton.setSelected(false);
-//				outer.showCard();
-//			} else {
-//				flippedFlag = false;
-//				outer.showCard();
-//			}
-
-
             flippedFlag = false;				//sets card to front when next is pressed
             flipCardButton.setSelected(false);	//resets button to not pressed
             outer.showCard();

@@ -37,6 +37,13 @@ public class Deck  implements Serializable {
     public String getName() {
         return this.name;
     }
+    
+    /**
+    Getter for the deck attribute.
+    */
+   public ArrayList<FlashCard> getDeckList() {
+       return this.cards;
+   }
 
     /**
      Setter for the name attribute
@@ -49,16 +56,6 @@ public class Deck  implements Serializable {
      Shuffles the deck into a random order
      */
     public void shuffle() {
-//        ArrayList<FlashCard> shuffledCards = new ArrayList<FlashCard>();
-//        int numCards = cards.size();
-//        for(int i=0; i < numCards; i++)
-//        {
-//            int randomIndex = (int)(Math.random()*cards.size());
-//            FlashCard randomCard = this.cards.remove(randomIndex);
-//            shuffledCards.add(randomCard);
-//        }
-//
-//        this.cards = shuffledCards;
         for(int i = cards.size(); i > 1; i--){
             int randomIndex = (int) (Math.random()*cards.size());
             if(i-1 != randomIndex)
