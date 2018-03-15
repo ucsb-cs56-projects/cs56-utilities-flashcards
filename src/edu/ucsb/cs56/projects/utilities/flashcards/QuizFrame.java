@@ -217,17 +217,9 @@ public class QuizFrame extends JFrame implements QuizUI {
 				
 				// first item is blank
 				this.answerList.addItem("");
-				
-				// finding the correct answer
-				int location = 0;
-				for (FlashCard currentAnswer : wholeDeck) {
-					if (currentAnswer.getFrontText() == this.controller.getCardText()) {
-						correctAnswer = currentAnswer.getBackText();
-						wholeDeck.remove(location);
-						break;
-					}
-					++location;
-				}
+
+                correctAnswer = wholeDeck.get(wholeDeck.size() - 1).getBackText();
+                wholeDeck.remove(wholeDeck.size() - 1);
 
 				// creating set
 				setOfAnswers.add(correctAnswer);
@@ -242,6 +234,7 @@ public class QuizFrame extends JFrame implements QuizUI {
 			}
 		} else {
 			// removes multiple choice if there is less than 4 cards
+            wholeDeck.remove(wholeDeck.size() - 1);
 			this.answerList.setVisible(false);
 		}
 

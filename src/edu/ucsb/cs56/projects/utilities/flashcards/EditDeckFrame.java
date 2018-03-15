@@ -14,6 +14,23 @@ public class EditDeckFrame extends JFrame{
      */
     public EditDeckFrame(Deck deck, String currentFile) {
         super("Edit existing deck");
+        setupUI();
+
+        this.newDeck = deck;
+        this.currentFile = currentFile;
+        this.currentCard = newDeck.draw();
+        this.cardNum = 0;
+        this.cardDialog = new NewCardDialog(outer);
+        this.flippedFlag = false;
+        this.showCard();
+        this.actionListeners = new ArrayList<ActionListener>();
+    }
+
+
+    /**
+     * Abstraction for setting up UI
+     */
+    private void setupUI() {
         this.outer = this;
 
         JPanel contentPanel = new JPanel();
@@ -93,14 +110,6 @@ public class EditDeckFrame extends JFrame{
         this.pack();
 
         this.setMinimumSize(new Dimension(this.getWidth(), this.getHeight()));
-        this.newDeck = deck;
-        this.currentFile = currentFile;
-        this.currentCard = newDeck.draw();
-        this.cardNum = 0;
-        this.cardDialog = new NewCardDialog(outer);
-        this.flippedFlag = false;
-        this.showCard();
-        this.actionListeners = new ArrayList<ActionListener>();
     }
 
     /**
@@ -250,6 +259,18 @@ public class EditDeckFrame extends JFrame{
     }
 
     /**
+     * Helper function to show card for editing or adding card in CardDialogListener
+     */
+    public void cardDialogListenerShow() {
+        String frontText = cardDialog.getFrontText();
+        String backText = cardDialog.getBackText();
+        FlashCard newCard = new FlashCard(frontText, backText);
+        currentCard = newCard;
+        cardDialog.setVisible(false);
+        outer.showCard();
+    }
+
+    /**
      * Dialog Listener for the "New Card" Dialog
      */
     public class NewCardDialogListener implements ActionListener {
@@ -257,12 +278,7 @@ public class EditDeckFrame extends JFrame{
             if (currentCard != null)
                 newDeck.putBack(currentCard);
 
-            String frontText = cardDialog.getFrontText();
-            String backText = cardDialog.getBackText();
-            FlashCard newCard = new FlashCard(frontText, backText);
-            currentCard = newCard;
-            cardDialog.setVisible(false);
-            outer.showCard();
+            cardDialogListenerShow();
 
         }
     }
@@ -275,12 +291,7 @@ public class EditDeckFrame extends JFrame{
             if (currentCard == null)
                 return;
 
-            String frontText = cardDialog.getFrontText();
-            String backText = cardDialog.getBackText();
-            FlashCard newCard = new FlashCard(frontText, backText);
-            currentCard = newCard;
-            cardDialog.setVisible(false);
-            outer.showCard();
+            cardDialogListenerShow();
         }
 
     }

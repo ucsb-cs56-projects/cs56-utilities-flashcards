@@ -1,20 +1,25 @@
 package edu.ucsb.cs56.projects.utilities.flashcards;
 
+import javax.lang.model.type.NullType;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Quiz {
 
     SoundController soundSource = new SoundController();
+    int currentQuizSize;
+
 	/**
 	 * Contructor for Quiz Mode
 	 * @param deck The deck to be quizzed on
 	 */
 	public Quiz(Deck deck) {
 		this.currentDeck = deck;
-		this.originalDeck = deck;
-		this.currentCard = this.currentDeck.draw();
-		this.currentDeck.putBack(currentCard);
+		this.originalDeck = new Deck(deck);
+		this.currentDeck.shuffle();
 		this.incorrectCards = new Deck();
+		this.currentQuizSize = originalDeck.getSize();
 		this.restart("Soft Reset");
 	}
 	/**
@@ -46,7 +51,7 @@ public class Quiz {
 	 * @return The index of the current card
 	 */
 	public int getCurrentCardNum() {
-		if(answerCount < currentDeck.getSize())
+		if(answerCount < originalDeck.getSize())
 			return this.answerCount+1;
 		else
 			return this.answerCount;
@@ -57,7 +62,7 @@ public class Quiz {
 	 * @return The deck's size
 	 */
 	public int getDeckSize() {
-		return this.currentDeck.getSize();
+		return this.originalDeck.getSize();
 	}
 
 	/**
@@ -88,11 +93,17 @@ public class Quiz {
 			}
 
 			this.answerCount += 1;
-			this.currentCard = this.currentDeck.draw();
-			this.currentDeck.putBack(this.currentCard);
+			if (this.currentDeck.getSize() > 0) {
+				this.currentCard = this.currentDeck.draw();
+				this.currentDeck.putBack(this.currentCard);
+			}
 
-			if(this.answerCount == this.currentDeck.getSize())
+
+			if(this.answerCount == currentQuizSize)
 				this.completeFlag = true;
+
+			if (this.currentDeck.getSize() == 0)
+				currentCard = null;
 
 			return correctAnswer;
 		}
@@ -122,18 +133,30 @@ public class Quiz {
 			this.correctAnswerCount = 0;
 			this.answerCount = 0;
 			if (option.equals("Hard Reset")) {
-				this.currentDeck = originalDeck;
-
+				this.currentDeck = new Deck(originalDeck);
+				incorrectCards = new Deck();
+				currentCard = null;
 			} else if (option.equals("Subdeck Reset")) {
-				this.currentDeck = incorrectCards;
+				if (incorrectCards.getSize() != 0) {
+					this.currentDeck = incorrectCards;
+					incorrectCards = new Deck();
+					currentCard = null;
+				}
+			}
+			if (currentCard != null)
+				this.currentDeck.putBack(currentCard);
+
+			if(currentDeck.getSize() == 0) {
+				currentDeck = new Deck(originalDeck);
+				currentCard = null;
 				incorrectCards = new Deck();
 			}
-			//Soft Reset doesn't do anything extra
+
 			this.currentDeck.shuffle();
-			if(currentDeck.getSize() != 0) {
-				this.currentCard = this.currentDeck.draw();
-			}
+
+			this.currentCard = this.currentDeck.draw();
 			this.currentDeck.putBack(this.currentCard);
+			currentQuizSize = currentDeck.getSize();
 		}
 	}
 

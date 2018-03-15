@@ -76,7 +76,7 @@ public class QuizController {
      * @return The deck's size
      */
     public int getQuizSize() {
-        return this.quiz.getDeckSize();
+        return this.quiz.currentQuizSize;
     }
 
     /**

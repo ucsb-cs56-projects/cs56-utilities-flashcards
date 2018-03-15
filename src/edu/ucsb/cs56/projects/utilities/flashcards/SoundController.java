@@ -8,54 +8,32 @@ import javax.sound.sampled.*;
  */
 public class SoundController {
 
-	File successFile = new File("media/success.wav");
-	AudioInputStream successStream;
-	Clip success;
+	String successFileName = "media/success.wav";
+	String failFileName = "media/fail.wav";
 
-	File failFile = new File("media/fail.wav");
-	AudioInputStream failStream;
-	Clip fail;
+	Sound successSound;
+	Sound failSound;
 
     /**
      * Contructor that connects sound streams to files and opens them.
      */
 	public SoundController() {
-		try {
-			successStream = AudioSystem.getAudioInputStream(successFile);
-			success = AudioSystem.getClip();
-            success.open(successStream);
-
-			failStream = AudioSystem.getAudioInputStream(failFile);
-			fail = AudioSystem.getClip();
-            fail.open(failStream);
-
-			
-		} catch (UnsupportedAudioFileException e) {
-			System.out.println("No sound: Unsupported Audio File Exception");
-		} catch (LineUnavailableException e) {
-			System.out.println("No sound: Line Unavailable Exception");
-		} catch (IOException e) {
-			System.out.println("No sound: IO Exception");
-		}
+		successSound = new Sound(successFileName);
+		failSound = new Sound(failFileName);
 	}
 
 	/**
 	 * Method that plays the "success" sound clip."
 	 */	
 	public void playSuccess() {
-
-        	success.setMicrosecondPosition(0);
-        	success.start();
-
+		successSound.playSound();
 	}
 
 	/**
 	 * Method that plays the "fail" sound clip."
 	 */
 	public void playFail(){
-
-        	fail.setMicrosecondPosition(0);
-		fail.start();
+		failSound.playSound();
 	
 	}
 

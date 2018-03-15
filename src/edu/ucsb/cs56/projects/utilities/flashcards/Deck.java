@@ -31,6 +31,11 @@ public class Deck  implements Serializable {
         this.name = name;
     }
 
+    public Deck(Deck oldDeck) {
+        this.name = oldDeck.name;
+        this.cards = new ArrayList<FlashCard>(oldDeck.cards);
+    }
+
     /**
      Getter for the name attribute.
      */
