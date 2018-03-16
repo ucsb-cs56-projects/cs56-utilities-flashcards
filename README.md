@@ -30,3 +30,11 @@ This is a relatively unedited legacy code project compared to the others. I beli
 One of the features we would like to see in the future is a more robust answer checking system. Currently, all it does is get rid of casing and compare to see if the strings are equal. Another thing is that this app would be really useful on Android, and porting it over to that, while ambitious, seems like the direction this project is heading right now.
 
 There is one bug that might hinder progress when working on this project. If the quiz mode does not show up, comment out all code in the Quiz related classes that have to do with sound. We are not sure why this happens.
+
+# W18 final remarks
+
+The project is a very simple flash card program, that has different modes for studying, quiz, etc.  Before you get started on the code, take a look at all the different classes, and how they relate to eachother.  I suggest using a debugger to step through as you are using it to get a better understanding of how things work.
+
+Features that could be added would be a better interface with the program.  It's very bland, and grey.  Could use some color, and some razzle dazzle.  Make studying fun!  Also this would be valuable to have on other devices like android, or even make it accessable though the web.
+
+A large bug to consider: When multiple choice mode is active during a quiz (can only occur if there are more than 4 cards), the first 4 cards are predetermined.  This can be seen by what the answers are for the first question.  The following cards in the quiz will be the front sides to the answers of the first question.  
