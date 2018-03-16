@@ -9,7 +9,7 @@ public class QuizController {
      * Getter for the current card's text
      * @return The current card's front text
      */
-    public ArrayList<FlashCard> getTheDeck() {
+    public Deck getOriginalDeck() {
         return this.quiz.getWholeDeck();
     }
     

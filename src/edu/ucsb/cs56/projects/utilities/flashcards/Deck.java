@@ -46,10 +46,10 @@ public class Deck  implements Serializable {
     /**
     Getter for the deck attribute.
     */
-   public ArrayList<FlashCard> getDeckList() {
-       return this.cards;
-   }
-
+    public ArrayList<FlashCard> getDeckList() {
+        return this.cards;
+    }
+    
     /**
      Setter for the name attribute
      */
