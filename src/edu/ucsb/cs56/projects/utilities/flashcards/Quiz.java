@@ -26,8 +26,8 @@ public class Quiz {
 	 * Getter for the amount of correct answers so far
 	 * @return The number of correct answers
 	 */
-	public ArrayList<FlashCard>  getWholeDeck() {
-		return this.currentDeck.getDeckList();
+	public Deck getWholeDeck() {
+		return this.originalDeck;
 	}
 
 	/**
@@ -135,28 +135,21 @@ public class Quiz {
 			if (option.equals("Hard Reset")) {
 				this.currentDeck = new Deck(originalDeck);
 				incorrectCards = new Deck();
-				currentCard = null;
 			} else if (option.equals("Subdeck Reset")) {
 				if (incorrectCards.getSize() != 0) {
 					this.currentDeck = incorrectCards;
 					incorrectCards = new Deck();
-					currentCard = null;
 				}
 			}
-			if (currentCard != null)
-				this.currentDeck.putBack(currentCard);
 
 			if(currentDeck.getSize() == 0) {
 				currentDeck = new Deck(originalDeck);
-				currentCard = null;
 				incorrectCards = new Deck();
 			}
 
 			this.currentDeck.shuffle();
-
-			this.currentCard = this.currentDeck.draw();
-			this.currentDeck.putBack(this.currentCard);
 			currentQuizSize = currentDeck.getSize();
+			this.currentCard = this.currentDeck.draw();
 		}
 	}
 

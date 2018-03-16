@@ -201,10 +201,11 @@ public class QuizFrame extends JFrame implements QuizUI {
 		int possibleScore = this.controller.getPossibleScore();
 		int cardNum = this.controller.getCurrentCardNum();
 		int quizSize = this.controller.getQuizSize();
-		ArrayList<FlashCard> wholeDeck = this.controller.getTheDeck();
+//		Deck wholeDeck =
+		ArrayList<FlashCard> wholeDeckCards = new Deck(this.controller.getOriginalDeck()).getDeckList();
 
 		// Creates multiple choice if there are enough cards
-		if (wholeDeck.size() > 3) {
+		if (wholeDeckCards.size() > 3) {
 			this.answerList.setVisible(true);
 			if (quizSize > 3 || this.answerList.getItemCount() > 1) {
 				ArrayList<String> setOfAnswers = new ArrayList<String>();
@@ -218,13 +219,21 @@ public class QuizFrame extends JFrame implements QuizUI {
 				// first item is blank
 				this.answerList.addItem("");
 
-                correctAnswer = wholeDeck.get(wholeDeck.size() - 1).getBackText();
-                wholeDeck.remove(wholeDeck.size() - 1);
+				// finding the correct answer
+				int location = 0;
+				for (FlashCard currentAnswer : wholeDeckCards) {
+					if (currentAnswer.getFrontText() == this.controller.getCardText()) {
+						correctAnswer = currentAnswer.getBackText();
+						wholeDeckCards.remove(location);
+						break;
+					}
+					++location;
+				}
 
 				// creating set
 				setOfAnswers.add(correctAnswer);
 				for (int i = 0; i < 3; i++)
-					setOfAnswers.add(wholeDeck.get(i).getBackText());
+					setOfAnswers.add(wholeDeckCards.get(i).getBackText());
 
 				Collections.shuffle(setOfAnswers);
 
@@ -234,7 +243,6 @@ public class QuizFrame extends JFrame implements QuizUI {
 			}
 		} else {
 			// removes multiple choice if there is less than 4 cards
-            wholeDeck.remove(wholeDeck.size() - 1);
 			this.answerList.setVisible(false);
 		}
 
